@@ -1,6 +1,5 @@
 #ifndef JSONOBJECT_HPP
 #define JSONOBJECT_HPP
-#include "raylib.h"
 #include <math.h>
 #include <vector>
 #include <string>
