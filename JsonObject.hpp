@@ -1,6 +1,7 @@
 #ifndef JSONOBJECT_HPP
 #define JSONOBJECT_HPP
-#include <math.h>
+#include <cstdarg>
+#include <cmath>
 #include <vector>
 #include <string>
 

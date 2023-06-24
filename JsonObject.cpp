@@ -1,6 +1,6 @@
 #include "JsonObject.hpp"
 
-const char* TextFormat(const char *__restrict __format, ...)__THROWNL
+const char* TextFormat(const char *__restrict __format, ...)
 {
     char* s = (char*)malloc(sizeof(char)*1024);
     va_list args;
@@ -59,7 +59,7 @@ JsonObject::JsonObject(std::string sfile)
         if(data[0]=='{')
         {
             data = _extract(data,'{','}');
-            for(int i=0;i<data.length();i++)
+            for(unsigned int i=0;i<data.length();i++)
             {
                 switch(data[i])
                 {
@@ -151,7 +151,7 @@ void JsonObject::_addArray(std::string name,std::string value)
         int in_string=0;
         std::string t_str="";
         std::vector<std::string> vstr;
-        for(int i=0;i<value.length();i++)
+        for(unsigned int i=0;i<value.length();i++)
         {
             if(value[i]=='"')
             {
@@ -433,7 +433,7 @@ std::string JsonObject::ToString()
         as_value.push_back(_dj[i].ToString());
     }
     std::string s="{";
-    for(int i=0;i<as_key.size();i++)
+    for(unsigned int i=0;i<as_key.size();i++)
     {
         s += "\n" + as_key[i] + " :" + as_value[i];
         if(i<as_key.size()-1) s += ",";
@@ -529,7 +529,7 @@ JsonObject JsonObject::GetObject(std::string key)
 
 JsonObject JsonObject::GetObject(int id)
 {
-    if(id>-1 && id<_dj.size())
+    if(id>-1 && id<(signed int)_dj.size())
     {
         return _dj[id];
     }
