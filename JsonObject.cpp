@@ -87,6 +87,24 @@ JsonObject::JsonObject(std::string sfile)
         }
     }
 }
+JsonObject::~JsonObject()
+{
+    _ds.clear();
+    _ds_keys.clear();
+    _di.clear();
+    _di_keys.clear();
+    _df.clear();
+    _df_keys.clear();
+    _db.clear();
+    _db_keys.clear();
+    _dj.clear();
+    _dj_keys.clear();
+    _dai1.clear();
+    _dai1_keys.clear();
+    _das1.clear();
+    _das1_keys.clear();
+}
+
 void JsonObject::_addArray(std::string name,std::string value)
 {
     std::string ext = _extract(value,'[',']');
@@ -351,8 +369,8 @@ std::string JsonObject::ToString()
         sdata = "[";
         for(unsigned int j=0;j<_dai1[i].size();j++)
         {
+            if(j>0) sdata += ", ";
             sdata += TextFormat(" %d",_dai1[i][j]);
-            if(i<_dai1.size()) sdata += ", ";
         }
         sdata += "]";
         as_key.push_back(TextFormat("%c%s%c",'"',_dai1_keys[i].c_str(),'"'));
@@ -365,8 +383,9 @@ std::string JsonObject::ToString()
         sdata = "[";
         for(unsigned int j=0;j<_das1[i].size();j++)
         {
+            if(j>0) sdata += ", ";
             sdata += '"' + _das1[i][j] + '"';
-            if(j<_das1[i].size()-1) sdata += ", ";
+
         }
         sdata += "]";
         as_key.push_back(TextFormat("%c%s%c",'"',_das1_keys[i].c_str(),'"'));
@@ -380,8 +399,8 @@ std::string JsonObject::ToString()
     std::string s="{";
     for(int i=0;i<as_key.size();i++)
     {
+        if(i>0) s += ",";
         s += "\n" + as_key[i] + " :" + as_value[i];
-        if(i<as_key.size()-1) s += ",";
     }
     s += "\n}";
     //puts(s.c_str());
@@ -519,12 +538,12 @@ void JsonObject::SetObject(std::string key, JsonObject value)
     for(unsigned int i=0;i<_dj_keys.size();i++)
     {
         if(_dj_keys[i]==key){
-            _dj[i] = *(new JsonObject(value.ToString()));
+            _dj[i] = value;//*(new JsonObject(value.ToString()));
             return;
         }
     }
 	_dj_keys.push_back(key);
-	_dj.push_back( *(new JsonObject(value.ToString())));
+	_dj.push_back(value);//*(new JsonObject(value.ToString())));
 
 }
 void JsonObject::SetBool(std::string key, bool value)

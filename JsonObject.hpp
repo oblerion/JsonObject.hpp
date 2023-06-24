@@ -36,6 +36,7 @@ private:
 public:
     JsonObject();
     JsonObject(std::string sfile);
+    ~JsonObject();
     void WriteFile(std::string sfile);
     std::string ToString();
     bool IsEmpty();
