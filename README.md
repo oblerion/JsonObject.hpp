@@ -16,7 +16,7 @@ With same functionnality and fix.
 #include <string>
 #include <vector>
 
-JsonObject jo = new JsonObject("file.json");
+JsonObject jo("file.json");
 if(jo.IsEmpty()==false)
 {
   int x = jo.GetInt("x");            //-> 5
